@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}查询机器信息{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#machine").addClass("active");
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+                <h4>查询机器信息</h4>
+        </div>
+        <div class="container-fluid">
+            <form class="form-search" action="" method="post">
+                {%  csrf_token %}
+                <input type="text" class="input-medium search-query" name="s_user">
+                <button type="submit" class="btn">按IP查询</button>
+            </form>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> 内网IP </th>
+                        <th> 外网IP </th>
+                        <th> 机器名 </th>
+                        <th> 所在模块 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% autoescape off %}
+                        {% for machine in machines %}
+                        <tr>
+                            <td>{{ machine.mIP }}</td>
+                            <td>{{ machine.mExtIP }}</td>
+                            <td>{{ machine.mHostName }}</td>
+                            <td>
+                                {{ machine.mGroupID }}->{{machine.mGroupID.mgParent}}->{{machine.mGroupID.mgParent.bgParent}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endautoescape %}
+                </tbody>
+            </table>
+    	</div>
+    </div>
+{% endblock %}

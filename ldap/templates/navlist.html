@@ -1,0 +1,75 @@
+<div class="well" style="max-width: 340px; padding: 8px 0;">
+	<ul class="nav nav-list">
+		
+		<li class="nav-header">基本信息</li>
+		<li id="info">
+			<a href = "/account/info">用户信息</a>
+		</li>
+		<li class="divider"></li>
+		<li class="nav-header">查看权限列表</li>
+		<li id="listcommon">
+			<a href = "/ldap/common_list">可登录机器</a>
+		</li>
+		<li id="listsudo">
+			<a href = "/ldap/sudo_list">临时sudo</a>
+		</li>
+		<li class="divider"></li>
+		<li class="nav-header">申请新的权限</li>
+		<li id="addcommon">
+			<a href = "/ldap/common_add">普通登录申请</a>
+		</li>
+		<li id="addsudo">
+			<a href = "/ldap/sudo_add">临时sudo申请</a>
+		</li>
+
+		{% if user.is_staff %}
+			<li class="divider"></li>
+			<li class="nav-header">组长管理区</li>
+			<li id="groupinfo">
+				<a href = "/ldap/group_info">查看小组信息</a>
+			</li>
+			<li id="approve">
+				<a href = "/ldap/approve">临时sudo审批</a>
+			</li>
+		{% endif %}
+
+		{% if user.is_superuser %}
+			<li class="divider"></li>
+			<li class="nav-header">运维管理区</li>
+			<li id="opuseradd">
+				<a href = "/ldap/op_user_add">新增用户</a>
+			</li>
+			<li id="opuserclone">
+				<a href = "/ldap/op_user_clone">克隆用户</a>
+			</li>
+			<li id="opuserlist">
+				<a href = "/ldap/op_user_list">用户列表</a>
+			</li>
+			<li id="opgroupadd">
+				<a href = "/ldap/op_group_add">新增用户组</a>
+			</li>
+			<li id="opgrouplist">
+				<a href = "/ldap/op_group_list">用户组列表</a>
+			</li>
+			<li id="opapprove">
+				<a href = "/ldap/op_approve">临时sudo审批</a>
+			</li>
+			<li id="opsudodisable">
+				<a href = "/ldap/op_sudo_disable">禁用临时sudo</a>
+			</li>
+			<li id="opsudoeradd">
+				<a href = "/ldap/op_sudoer_add">新增超级用户</a>
+			</li>
+			<li id="opsudoerlist">
+				<a href = "/ldap/op_sudoer_list">超级用户列表</a>
+			</li>
+			<li id="opcmdadd">
+				<a href = "/ldap/op_cmd_add">新增sudo命令</a>
+			</li>
+			<li id="opcmdlist">
+				<a href = "/ldap/op_cmd_list">sudo命令列表</a>
+			</li>
+		{% endif %}
+		<li class="divider"></li>
+	</ul>
+</div>

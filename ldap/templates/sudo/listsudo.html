@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}临时管理员权限列表{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#listsudo").addClass("active");
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+            <h4>{{ user.username }}你好，你拥有以下机器的sudo权限：</h4>
+        </div>
+        <div class="container-fluid">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> IP列表 </th>
+                        <th> 命令 </th>
+                        <th> 生效时间 </th>
+                        <th> 失效时间 </th>
+                        <th> 状态 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for field in sudos %}
+                    <tr>
+                        <td>{{ field.0 }}</td>
+                        <td>{{ field.1 }}</td>
+                        <td>{{ field.2 |date:"Y-m-d H:i"}}</td>
+                        <td>{{ field.3 |date:"Y-m-d H:i"}}</td>
+                        <td>{{ field.4 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/ldap/sudo_add/" class="btn btn-primary"> 申请临时sudo权限 </a>
+        </div>
+    </div>
+{% endblock %}

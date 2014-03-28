@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}小组信息查看{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#groupinfo").addClass("active");
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+            <h4>{{ user.username }}你好，你所管理的小组信息如下：</h4>
+        </div>
+        <div class="container-fluid">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> 小组名称 </th>
+                        <th> 小组成员 </th>
+                        <th> 可用业务模块 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% autoescape off %}
+                        {% for ug in managed_ugs %}
+                        <tr>
+                            <td>{{ ug.0 }}</td>
+                            <td>{{ ug.1 }}</td>
+                            <td>{{ ug.2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endautoescape %}
+                </tbody>
+            </table>
+            <div class="well">
+                <form class="form-search" action="" method="post">
+                    {%  csrf_token %}
+                    <input type="text" class="input-medium search-query" name="s_user">
+                    <button type="submit" class="btn">查询用户</button>
+                </form>
+                {% if userinfo %}
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th> 用户名 </th>
+                                <th> 登录权限 </th>
+                                <th> 临时sudo权限 </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% autoescape off %}
+                                    <td>{{ userinfo.0 }}</td>
+                                    <td>{{ userinfo.1 }}</td>
+                                    <td>{{ userinfo.2 }}</td>
+                                {% endautoescape %}
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+    	</div>
+    </div>
+{% endblock %}

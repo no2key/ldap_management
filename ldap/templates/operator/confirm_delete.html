@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}确认删除{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+                <h3>删除内容</h3>
+        </div>
+        <div id="content" class="container-fluid"> 
+            <h4>是否确认删除 "{{ object }}"? 一经删除，无法恢复！</h4>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div>
+                    <input type="hidden" name="post" value="yes" />
+                    <input class="btn btn-danger pull-center" type="submit" value="是的，我确定" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}没有权限{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well text-center">
+                <h3>权限不足，操作失败！</h3>
+                <a class="btn btn-large btn-primary" type="submit" href="/account/info">返回个人信息页面</a>
+        </div>
+    </div>
+{% endblock %}

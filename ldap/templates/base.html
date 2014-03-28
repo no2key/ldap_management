@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {% block css %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+	  body {
+	    padding-top: 60px;
+	  }
+	</style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="brand " href="">易迅LDAP管理平台</a>
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{{ user.username }}<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/accounts/logout">退出登录</a></li>
+    					</ul>
+    				</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		{% include 'navlist.html' %}
+	</div>
+	<div class="container-fluid span12">
+
+        {% if messages %}
+			{% for message in messages %}
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			    <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message|safe }}</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+	{% block content %}{% endblock %}
+	{% block footer %}{% endblock %}
+	   
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

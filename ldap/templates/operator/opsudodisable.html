@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}禁用临时sudo页面{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#opsudodisable").addClass("active");
+        $("[name='checkAll']").click(function(){
+            var selected = $(this).val();
+            $(":radio[name!='checkAll']").each(function(){
+                if($(this).val()==selected){
+                    $(this).click();
+                } 
+            });
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+            <h4>{{ user.username }}你好，目前生效中的临时sudo如下：</h4>
+        </div>
+        <div class="container-fluid">
+
+            <form action="" method="post" name="myForm">
+                {% csrf_token %}
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th> 用户名 </th>
+                            <th> 事由 </th>
+                            <th> IP列表 </th>
+                            <th> 权限 </th>
+                            <th> 起始时间 </th>
+                            <th> 失效时间 </th>
+                            <th> <input type="radio" value="yes" name="checkAll" /> 全部禁用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in to_disable %}
+                        <tr>
+                            <td>{{ item.0 }}</td>
+                            <td>{{ item.1 }}</td>
+                            <td>{{ item.2 }}</td>
+                            <td>{{ item.3 }}</td>
+                            <td>{{ item.4 }}</td>
+                            <td>{{ item.5 }}</td>
+                            <td> <input type="radio" value="yes" name="{{ item.6 }}" /> 禁用</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <input class="btn btn-danger" type="submit" value="禁用临时Sudo">
+            </form>
+    	</div>
+    </div>
+{% endblock %}

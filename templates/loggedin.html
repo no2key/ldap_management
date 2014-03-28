@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}欢迎使用{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $("#info").addClass("active");
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid offset4">
+        <div class="well well-small text-center">
+            <h4>{{ user.username }}你好，你在本系统中的信息如下：</h4>
+        </div>
+        <div class="container-fluid">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> 用户组 </th>
+                        <th> 组长 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ug in ugs %}
+                    <tr>
+                        <td>{{ ug.0 }}</td>
+                        <td>{{ ug.1 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th> ID </th>
+                        <th> 可申请业务模块 </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mid,mname in mgs.items %}
+                    <tr>
+                        <td>{{ mid }}</td>
+                        <td>{{ mname }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    	</div>
+    </div>
+{% endblock %}
